@@ -3,8 +3,6 @@ package com.gsoeller.armstrong.ssh;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.swing.JOptionPane;
-
 import com.gsoeller.armstrong.ArmstrongService.PropertiesLoader;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
@@ -15,19 +13,15 @@ import com.jcraft.jsch.UserInfo;
 
 public class SSHClient {
 
-	private Session session;
-	private Channel channel;
-	public void connect() {
+	public void executeCommand(String command, String host, String user) {
 		try {
+			Session session;
+			Channel channel;
+			
 			JSch jsch = new JSch();
 
 			PropertiesLoader loader = new PropertiesLoader();
 			jsch.addIdentity(loader.getProperty("com.gsoeller.public_key"));
-
-			String host = null;
-			host = loader.getProperty("com.gsoeller.armstrong.host");
-
-			String user = loader.getProperty("com.gsoeller.armstring.user");
 
 			session = jsch.getSession(user, host, 22);
 
@@ -35,20 +29,7 @@ public class SSHClient {
 			session.setUserInfo(ui);
 			session.connect();
 			channel = session.openChannel("exec");
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-	}
-
-	public void disconnect() {
-		channel.disconnect();
-		session.disconnect();		
-	}
-	
-	public void executeCommand(String command) {
-		try {
-
-			((ChannelExec) channel).setCommand("cd /var/www/tmp && git clone https://github.com/soelgary/Complaints.git");
+			((ChannelExec) channel).setCommand(command);
 
 			// X Forwarding
 			// channel.setXForwarding(true);
@@ -82,6 +63,8 @@ public class SSHClient {
 					break;
 				}
 			}
+			channel.disconnect();
+			session.disconnect();	
 		} catch (JSchException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

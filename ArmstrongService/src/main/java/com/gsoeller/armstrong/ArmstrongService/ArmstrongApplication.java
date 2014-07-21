@@ -23,8 +23,10 @@ public class ArmstrongApplication extends Application<ArmstrongConfiguration>{
 			throws Exception {
 		env.jersey().register(new GithubResource());
 		SSHClient client = new SSHClient();
-		client.connect();
-		client.executeCommand("pwd");
+		PropertiesLoader loader = new PropertiesLoader();
+		String host = loader.getProperty("com.gsoeller.armstrong.host");
+		String user = loader.getProperty("com.gsoeller.armstring.user");
+		client.executeCommand("pwd", host, user);
 		
 	}
 

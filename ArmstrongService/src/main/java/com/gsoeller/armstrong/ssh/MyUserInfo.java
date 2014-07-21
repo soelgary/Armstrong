@@ -1,16 +1,5 @@
 package com.gsoeller.armstrong.ssh;
 
-import java.awt.Container;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
 import com.jcraft.jsch.UIKeyboardInteractive;
 import com.jcraft.jsch.UserInfo;
 
@@ -23,11 +12,8 @@ public class MyUserInfo implements UserInfo, UIKeyboardInteractive {
 		return true;
 	}
 
-	String passphrase;
-	JTextField passphraseField = (JTextField) new JPasswordField(20);
-
 	public String getPassphrase() {
-		return passphrase;
+		return null;
 	}
 
 	public boolean promptPassphrase(String message) {
@@ -39,7 +25,6 @@ public class MyUserInfo implements UserInfo, UIKeyboardInteractive {
 	}
 
 	public void showMessage(String message) {
-		JOptionPane.showMessageDialog(null, message);
 	}
 
 	public String[] promptKeyboardInteractive(String destination, String name,
