@@ -13,9 +13,13 @@ public class DropwizardApplicationMapper implements ResultSetMapper<DropwizardAp
 	public DropwizardApplication map(int index, ResultSet r, StatementContext ctx)
 			throws SQLException {
 		String name = r.getString("name");
-		String path = r.getString("path");
+		String buildPath = r.getString("buildPath");
+		String deployPath = r.getString("deployPath");
+		String ymlPath = r.getString("ymlPath");
 		DropwizardApplication app = new DropwizardApplication();
-		app.setDeployablePath(path);
+		app.setDeployablePath(deployPath);
+		app.setBuildPath(buildPath);
+		app.setYmlPath(ymlPath);
 		app.setName(name);
 		return app;
 	}
