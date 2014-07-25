@@ -17,7 +17,7 @@ public class DropwizardApplicationMapper implements ResultSetMapper<DropwizardAp
 		String deployPath = r.getString("deployPath");
 		String ymlPath = r.getString("ymlPath");
 		DropwizardApplication app = new DropwizardApplication();
-		app.setDeployablePath(deployPath);
+		app.setDeployPath(deployPath);
 		app.setBuildPath(buildPath);
 		app.setYmlPath(ymlPath);
 		app.setName(name);

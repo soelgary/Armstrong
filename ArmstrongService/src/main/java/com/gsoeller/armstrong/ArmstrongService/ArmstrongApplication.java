@@ -2,12 +2,9 @@ package com.gsoeller.armstrong.ArmstrongService;
 
 import org.skife.jdbi.v2.DBI;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import com.gsoeller.armstrong.daos.DropwizardApplicationDao;
 import com.gsoeller.armstrong.managers.DropwizardApplicationManager;
 import com.gsoeller.armstrong.resources.ApplicationResource;
-import com.gsoeller.armstrong.ssh.SSHClient;
 
 import io.dropwizard.Application;
 import io.dropwizard.jdbi.DBIFactory;
@@ -31,9 +28,8 @@ public class ArmstrongApplication extends Application<ArmstrongConfiguration>{
 		final DBIFactory factory = new DBIFactory();
 		final DBI jdbi = factory.build(env, conf.getDataSourceFactory(), "mysql");
 		final DropwizardApplicationDao dao = jdbi.onDemand(DropwizardApplicationDao.class);
-		Injector injector = Guice.createInjector(new ArmstrongServiceModule());
 		DropwizardApplicationManager manager = new DropwizardApplicationManager(dao);
-		env.jersey().register(new ApplicationResource(injector.getInstance(SSHClient.class), manager));
+		env.jersey().register(new ApplicationResource(manager));
 		//PropertiesLoader loader = new PropertiesLoader();
 		//String host = loader.getProperty("com.gsoeller.armstrong.host");
 		//String user = loader.getProperty("com.gsoeller.armstring.user");

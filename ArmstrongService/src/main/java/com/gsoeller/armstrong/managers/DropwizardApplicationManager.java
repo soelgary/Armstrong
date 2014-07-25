@@ -20,6 +20,6 @@ public class DropwizardApplicationManager {
 	}
 	
 	public int addApplication(DropwizardApplication app) {
-		return dao.addApplication(app.getName(), app.getDeployablePath(), app.getBuildPath(), app.getYmlPath());
+		return dao.addApplication(app.getName(), app.getDeployPath(), app.getBuildPath(), app.getYmlPath());
 	}
 }
