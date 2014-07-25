@@ -16,6 +16,10 @@ public interface DropwizardApplicationDao {
 	@Mapper(DropwizardApplicationMapper.class)
 	public List<DropwizardApplication> getAllAplications();
 	
+	@SqlQuery("SELECT * FROM DropwizardApplication where name = :appName limit 1")
+	@Mapper(DropwizardApplicationMapper.class)
+	public List<DropwizardApplication> getApplication(@Bind("appName") String appName);
+	
 	@SqlUpdate("INSERT INTO DropwizardApplication (name, deployPath, buildPath, ymlPath) values (:name, :deployPath, :buildPath, :ymlPath)")
 	public int addApplication(@Bind("name") String name, @Bind("deployPath") String deployPath, @Bind("buildPath") String buildPath, @Bind("ymlPath") String ymlPath);
 }
