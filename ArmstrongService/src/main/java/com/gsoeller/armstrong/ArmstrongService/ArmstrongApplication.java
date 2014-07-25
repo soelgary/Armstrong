@@ -1,9 +1,16 @@
 package com.gsoeller.armstrong.ArmstrongService;
 
-import com.gsoeller.armstrong.resources.GithubResource;
+import org.skife.jdbi.v2.DBI;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.gsoeller.armstrong.daos.DropwizardApplicationDao;
+import com.gsoeller.armstrong.managers.DropwizardApplicationManager;
+import com.gsoeller.armstrong.resources.ApplicationResource;
 import com.gsoeller.armstrong.ssh.SSHClient;
 
 import io.dropwizard.Application;
+import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
@@ -21,12 +28,17 @@ public class ArmstrongApplication extends Application<ArmstrongConfiguration>{
 	@Override
 	public void run(ArmstrongConfiguration conf, Environment env)
 			throws Exception {
-		env.jersey().register(new GithubResource());
-		SSHClient client = new SSHClient();
-		PropertiesLoader loader = new PropertiesLoader();
-		String host = loader.getProperty("com.gsoeller.armstrong.host");
-		String user = loader.getProperty("com.gsoeller.armstring.user");
-		client.executeCommand("pwd", host, user);
+		final DBIFactory factory = new DBIFactory();
+		final DBI jdbi = factory.build(env, conf.getDataSourceFactory(), "mysql");
+		final DropwizardApplicationDao dao = jdbi.onDemand(DropwizardApplicationDao.class);
+		Injector injector = Guice.createInjector(new ArmstrongServiceModule());
+		DropwizardApplicationManager manager = new DropwizardApplicationManager(dao);
+		env.jersey().register(new ApplicationResource(injector.getInstance(SSHClient.class), manager));
+		//PropertiesLoader loader = new PropertiesLoader();
+		//String host = loader.getProperty("com.gsoeller.armstrong.host");
+		//String user = loader.getProperty("com.gsoeller.armstring.user");
+		//client.addRepo(host, user, "https://github.com/soelgary/Armstrong.git");
+		//client.getProjects();
 		
 	}
 
