@@ -2,9 +2,12 @@ package com.gsoeller.armstrong.ArmstrongService;
 
 import org.skife.jdbi.v2.DBI;
 
+import com.gsoeller.armstrong.daos.DeployDao;
 import com.gsoeller.armstrong.daos.DropwizardApplicationDao;
+import com.gsoeller.armstrong.managers.DeployManager;
 import com.gsoeller.armstrong.managers.DropwizardApplicationManager;
 import com.gsoeller.armstrong.resources.ApplicationResource;
+import com.gsoeller.armstrong.resources.DeployResource;
 
 import io.dropwizard.Application;
 import io.dropwizard.jdbi.DBIFactory;
@@ -27,9 +30,12 @@ public class ArmstrongApplication extends Application<ArmstrongConfiguration>{
 			throws Exception {
 		final DBIFactory factory = new DBIFactory();
 		final DBI jdbi = factory.build(env, conf.getDataSourceFactory(), "mysql");
-		final DropwizardApplicationDao dao = jdbi.onDemand(DropwizardApplicationDao.class);
-		DropwizardApplicationManager manager = new DropwizardApplicationManager(dao);
-		env.jersey().register(new ApplicationResource(manager));
+		final DropwizardApplicationDao dropwizardApplicationDao = jdbi.onDemand(DropwizardApplicationDao.class);
+		final DeployDao deployDao = jdbi.onDemand(DeployDao.class);
+		DropwizardApplicationManager dropwizardApplicationManager = new DropwizardApplicationManager(dropwizardApplicationDao);
+		DeployManager deployManager = new DeployManager(deployDao);
+		env.jersey().register(new ApplicationResource(dropwizardApplicationManager));
+		env.jersey().register(new DeployResource(deployManager));
 		//PropertiesLoader loader = new PropertiesLoader();
 		//String host = loader.getProperty("com.gsoeller.armstrong.host");
 		//String user = loader.getProperty("com.gsoeller.armstring.user");
