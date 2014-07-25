@@ -16,6 +16,10 @@ Api's concerning applications that are/want to be deployed
 
 Gets a list of all the applications in the Armstrong db
 
+```GET /application/{appName}```
+
+Gets a single application
+
 ```POST /application```
 
 Creates a new deployable application
