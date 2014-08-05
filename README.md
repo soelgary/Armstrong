@@ -42,7 +42,10 @@ Static app for Armstrong
 To run the app, ```cd``` to ```ArmstrongUI``` then execute ```python -m SimpleHTTPServer 8000```. Once the server is running, you can view the page at ```127.0.0.1:8000``` with your browser.
 
 
-Want to contribute? Follow these steps
+Want to contribute?
+===================
+
+Follow these steps..
 
 1. clone this repository by running ```git clone https://github.com/soelgary/Armstrong.git```
 2. create a new branch ```git checkout -b branch-name```
