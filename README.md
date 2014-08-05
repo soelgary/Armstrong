@@ -33,3 +33,10 @@ Example payload is as follows
   "deployPath": "/var/www/TestApp/TestService-0.0.1-SNAPSHOT.jar"
 }
 ```
+
+ArmstrongUI
+===========
+
+Static app for Armstrong
+
+To run the app, ```cd``` to ```ArmstrongUI``` then execute ```python -m SimpleHTTPServer 8000```. Once the server is running, you can view the page at ```127.0.0.1:8000``` with your browser.
