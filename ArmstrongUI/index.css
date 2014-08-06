@@ -1,0 +1,85 @@
+* {
+    font-family: Arial;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #66CCFF;
+}
+
+.post {
+    margin: 50px auto;
+    width: 27%;
+    max-width: 800px;
+    min-width: 250px;
+    border-radius: 10px;
+    background-color: #0E0E0E;
+    padding: 15px;
+    border: 10px solid #3083FF;
+}
+
+.post .field-control {
+    margin-bottom: 12px;
+}
+
+.post .field-control label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: #EEFFEE;
+}
+
+.post .field-control input {
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    border: 3px solid #fff;
+    font-size: 20px;
+    width: 100%;
+}
+
+.post .field-control input:hover {
+    border-color: #2C9BF7;
+}
+
+.post .field-control input:focus {
+    border-color: #2c9bf7;
+}
+
+.post .field-control select {
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    border: 3px solid #fff;
+    font-size: 20px;
+    width: 100%;
+    color: #868686;
+}
+
+.post .field-control select:hover {
+    border-color: #2C9BF7;
+}
+
+.post .field-control select:hover {
+    border-color: #2C9BF7;
+}
+
+.post .button button {
+    width: 100%;
+    padding: 10px;
+    color: #fff;
+    background-color: #005CE6;
+    border-radius: 5px;
+    border: 1px solid #005CE6;
+    font-size: 20px;
+    font-weight: 700;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+.post .button button:hover {
+    background-color: #0040A0;
+    border: 1px solid #0040A0;
+    cursor: pointer;
+}
