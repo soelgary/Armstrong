@@ -60,10 +60,6 @@ body {
     border-color: #2C9BF7;
 }
 
-.post .field-control select:hover {
-    border-color: #2C9BF7;
-}
-
 .post .button button {
     width: 100%;
     padding: 10px;
@@ -76,10 +72,10 @@ body {
     -webkit-transition-duration: 0.3s;
     -moz-transition-duration: 0.3s;
     transition-duration: 0.3s;
+    cursor: pointer;
 }
 
 .post .button button:hover {
     background-color: #0040A0;
     border: 1px solid #0040A0;
-    cursor: pointer;
 }
