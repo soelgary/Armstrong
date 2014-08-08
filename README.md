@@ -34,6 +34,19 @@ Example payload is as follows
 }
 ```
 
+```GET /deploy```
+
+Gets all the deploys in the database
+
+```POST /deploy```
+
+Deploy a project. Example payload is as follows
+```json
+{
+  "appName": "ArmstrongService"
+}
+```
+
 ArmstrongUI
 ===========
 
